@@ -26,12 +26,12 @@ jobs:
       - name: Instalar dependencias
         run: npm install --legacy-peer-deps
 
+      # Actualización debido a un error que me mostro en actions.
+      # Pruebas: angular.json no define un target "test" (el proyecto no tiene
+      # pruebas unitarias configuradas), por eso solo se compila antes del análisis.
+
       - name: Compilar
         run: npm run build
-
-      - name: Pruebas con cobertura
-        continue-on-error: true
-        run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage
 
       - name: Análisis SonarQube Cloud
         uses: SonarSource/sonarqube-scan-action@v5
